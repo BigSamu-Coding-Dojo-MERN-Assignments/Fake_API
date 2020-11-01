@@ -62,6 +62,6 @@ app.get("/api/user/company", (request, response) => {
     });
 });
 
-const server = app.listen(8000, () =>
+const server = app.listen(9000, () =>
   console.log(`Server is locked and loaded on port ${server.address().port}!`)
 );
