@@ -16,49 +16,49 @@ app.use(express.urlencoded({extended: true}));
 // CLASS DEFINITION
 
 // User Class
-class User{
-    constructor(){
-        this._id = faker.random.uuid() ;
-        this.firstName = faker.name.firstName();
-        this.lastName = faker.name.lastName();
-        this.phoneNumber = faker.phone.phoneNumber();
-        this.email = faker.internet.email();
-        this.password = faker.internet.password();
-    }
-}
+const createUser = () => {
+    const newUser = {
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        phoneNumber: faker.phone.phoneNumber(),
+        email: faker.internet.email(),
+        password: faker.internet.password()
+    };
+    return newUser;
+};
 
 // Company Class
-class Company{
-    constructor(){
-        this._id = faker.random.uuid() ;
-        this.name = faker.name.firstName();
-        this.address = {
+const createCompany = () => {
+    const newCompany = {
+        name: faker.company.companyName(),
+        address: {
             street: faker.address.streetAddress(),
             city: faker.address.city(),
             state: faker.address.state(),
             zipCode: faker.address.zipCode(),
             country: faker.address.country()
         }
-    }
+    };
+    return newCompany;
 }
 
 // ROUTES
 
 // Route for creating a new User
 app.get("/api/users/new", (request, response) => {
-  response.json({user: new User()});
+  response.json({user: createUser()});
 });
 
 // Route for creating a new Company
 app.get("/api/companies/new", (request, response) => {
-    response.json({company: new Company()});
+    response.json({company: createCompany()});
 });
 
 // Route for creating a new Company
 app.get("/api/user/company", (request, response) => {
     response.json({
-        user: new User(),
-        company: new Company()
+        user: createUser(),
+        company: createUser()
     });
 });
 
